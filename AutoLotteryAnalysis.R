@@ -11,6 +11,7 @@ source("lotteryAnalysis.R",encoding="UTF-8")
 temp1_1 <- sample(1:49,6)
 temp1_2 <- historyRecordFN49(examineResult = temp1_1)
 temp1_3 <- historyRecordCombo3FN49(examineResult = temp1_1,historyRecord = temp1_2 )
+temp1_4 <- historyBest3FN49(examineResult = temp1_1 )
 
 ######################################################
 
@@ -18,6 +19,7 @@ temp1_3 <- historyRecordCombo3FN49(examineResult = temp1_1,historyRecord = temp1
 temp2_1 <- chooseBall49FN()
 temp2_2 <- historyRecordFN49(examineResult = temp2_1)
 temp2_3 <- historyRecordCombo3FN49(examineResult = temp2_1,historyRecord = temp2_2)
+temp2_4 <- historyBest3FN49(examineResult = temp2_1 )
 
 ######################################################
 
@@ -28,6 +30,7 @@ temp3_2 <- recommendMatrix49FN(recommendMatrix = temp3_1 )
 temp3_3 <- recommendResultFN49(recommendResult = temp3_2,score=105)
 temp3_4 <- historyRecordFN49(examineResult = temp3_3[,1])
 temp3_5 <- historyRecordCombo3FN49(examineResult = temp3_3[,1],historyRecord = temp3_4 )
+temp3_6 <- historyBest3FN49(examineResult = as.numeric(levels(temp3_3[,1])) )
 
 ######################################################
 

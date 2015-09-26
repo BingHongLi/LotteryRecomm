@@ -386,12 +386,13 @@ historyRecordCombo3FN49 <- function(examineResult=finalResult[['Number']],histor
   return(reserveNumber2)
 }
 
-tryCatch({
-  historyRecord49WithThreeCombn <- historyRecordCombo3FN49()
-  print("生成歷史上有出現此組合且中獎的紀錄")
-},error=function(e){
-  print("生成歷史中獎紀錄失敗，請檢察historyRecordCombo3FN49()")
-})
+#tryCatch({
+#  historyRecord49WithThreeCombn <- historyRecordCombo3FN49()
+#  print("生成歷史上有出現此組合且中獎的紀錄")
+#},error=function(e){
+#  print("生成歷史中獎紀錄失敗，請檢察historyRecordCombo3FN49()")
+#})
+
 ##############################################
 
 autoAnalysisProcess <- function(sourceDF="originData.csv",crawler=F){
@@ -408,70 +409,22 @@ autoAnalysisProcess <- function(sourceDF="originData.csv",crawler=F){
   print("分析結束")
 }
 
-
-#############################################
-
 ##############################################
-### 尋找最常出現組合
-#
-#frquentItemOriginData <- originData[,3:9]
-#
-#freqResult <- data.frame()
-#  
-#for(i in 1:nrow(frquentItemOriginData)){
-#  
-#  temp <- as.vector(frquentItemOriginData[i,])
-#  freqResult<- rbind(freqResult,t(combn(temp,3)))
-#  
-#}
+
+historyBest3FN49 <- function(examineResult,data=originData,check=3){
+   rawMatrix <- data[,c(3:9)]
+   #rep(0,49^2)
+   geneMatrix  <- matrix(0,nrow = nrow(rawMatrix),ncol = 49)
+   for(i in 1:nrow(rawMatrix)){
+     
+     for(j in 1:7 ){
+       geneMatrix[i,rawMatrix[i,j]]  <-  geneMatrix[i,rawMatrix[i,j]] +1
+     }
+   }
+   compareMatrix <- matrix(0,nrow=49,ncol=1)
+   compareMatrix[examineResult,1] <- compareMatrix[examineResult,1]+1
+   tempResult <- geneMatrix %*% compareMatrix
+   which(tempResult[,1]>=check )
+} 
 
 
-
-## matrix版
-#matrixT <- matrix(,nrow(freqResult),3)
-#for(i in 1:nrow(freqResult)){
-#  matrixT[i,] <- sort(unlist(freqResult[i,]))
-#  print(i)
-#}
-
-#name <- c()
-#for(i in 1:nrow(matrixT)){
-#  name <- c(name,paste(matrixT[i,],collapse =","))
-#}
-
-#freqStep1 <- data.frame(name=name,count=rep(1,40740))
-
-#name <- c()
-#count <- c()
-#for(i in unique(freqStep1[,1])){
-#  name <- c(name,i)
-#  count <-c(count,length(which(freqStep1[,1]==i))) 
-#  print(i)
-#}
-#freqFinalResult <- data.frame(name=name,count=count)
-# freqFinalResult <- freqFinalResult[order(freqFinalResult[,2]),]
-
-#saveRDS(freqFinalResult,file="freqFinalResult.RDS")
-#which(freqStep1[,1]==unique(freqStep1[,1])[1])
-
-# sort(unlist(freqResult[1,]))
-# write.csv(nameDF,file="nameDF.csv",col.names=T,row.names=F)
-# write.csv(freqResult,file="freq.csv",col.names=T,row.names=F)
-
-
-##################3
-# rm(list=ls())
-# x <- readRDS("freqResult.rds")
-# dim(x)
-
-#x <- x[1:100,]
-#colnames(x) <- ""
-
-# start <- Sys.time()
-# x1 <- x[order(unlist(x[,1]), unlist(x[,2]), unlist(x[,3])),]
-# y <- matrix(,dim(x)[1],3)
-# for(i in 1:dim(x)[1]){
-#y[i,] <- sort(unlist(x[i,]))
-# }
-# y1 <- y[order(y[,1], y[,2], y[,3]),]
-# Sys.time() - start
