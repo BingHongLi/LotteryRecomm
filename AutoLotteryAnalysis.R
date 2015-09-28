@@ -29,7 +29,7 @@ temp3_1 <- partialMatrix49FN(chooseBall49FN(c(2,3,4,5)))
 temp3_2 <- recommendMatrix49FN(recommendMatrix = temp3_1 )
 temp3_3 <- recommendResultFN49(recommendResult = temp3_2,score=105)
 temp3_4 <- historyRecordFN49(examineResult = temp3_3[,1])
-temp3_5 <- historyRecordCombo3FN49(examineResult = temp3_3[,1],historyRecord = temp3_4 )
+#temp3_5 <- historyRecordCombo3FN49(examineResult = temp3_3[,1],historyRecord = temp3_4 )
 temp3_6 <- historyBest3FN49(examineResult = as.numeric(levels(temp3_3[,1])) )
 
 ######################################################

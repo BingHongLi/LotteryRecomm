@@ -1,0 +1,7 @@
+library(shiny)
+library(datasets)
+df <- load("forShiny.RData")
+analysisStep1 <- data.frame()
+analysisStep2 <- data.frame()
+analysisStepResult <- data.frame()
+historyRecord <- c()

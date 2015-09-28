@@ -428,3 +428,29 @@ historyBest3FN49 <- function(examineResult,data=originData,check=3){
 } 
 
 
+###########
+# 以下可刪
+itemMXFN49 <- function(data=originData){
+  rawMatrix <- data[,c(3:9)]
+  #rep(0,49^2)
+  geneMatrix  <- matrix(0,nrow = nrow(rawMatrix),ncol = 49)
+  for(i in 1:nrow(rawMatrix)){
+    
+    for(j in 1:7 ){
+      geneMatrix[i,rawMatrix[i,j]]  <-  geneMatrix[i,rawMatrix[i,j]] +1
+    }
+  }
+  geneMatrix
+}
+
+compareResultFN49 <- function(examineResult,geneMatrix=originMatrix,check=3 ){
+  compareMatrix <- matrix(0,nrow=49,ncol=1)
+  compareMatrix[examineResult,1] <- compareMatrix[examineResult,1]+1
+  tempResult <- geneMatrix %*% compareMatrix
+  which(tempResult[,1]>=check )
+}
+
+# 
+originMatrix <- itemMXFN49()
+
+compareResultFN49(as.numeric(levels(finalResult[['Number']])))
